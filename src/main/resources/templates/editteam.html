@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Team</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="'Edit: ' + ${team.name}" class="mt-3">Edit Team</h1>
+        <form th:object="${team}" th:action="@{/saveteam}" method="post">
+            <input type="hidden" th:field="*{id}" />
+        
+            <div class="form-group">
+                <label for="name">Team Name</label>
+                <input type="text" id="name" th:field="*{name}" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">Save Changes</button>
+            <a th:href="@{/teamlist}" class="btn btn-danger mt-2">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
+

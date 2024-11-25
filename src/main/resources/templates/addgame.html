@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-3">Add Game to Player: <span th:text="${player.fname} + ' ' + ${player.lname}"></span></h1>
+        <form th:action="@{/gamelog/{playerid}/savegame(playerid=${player.id})}" th:object="${game}" method="post">
+            <div class="form-group">
+                <label for="mins">Minutes</label>
+                <input type="number" id="mins" th:field="*{mins}" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="points">Points</label>
+                <input type="number" id="points" th:field="*{points}" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="rebounds">Rebounds</label>
+                <input type="number" id="rebounds" th:field="*{rebounds}" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="assists">Assists</label>
+                <input type="number" id="assists" th:field="*{assists}" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="blocks">Blocks</label>
+                <input type="number" id="blocks" th:field="*{blocks}" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="steals">Steals</label>
+                <input type="number" id="steals" th:field="*{steals}" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="fgm">Field Goals Made (FGM)</label>
+                <input type="number" id="fgm" th:field="*{fgm}" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="fga">Field Goals Attempted (FGA)</label>
+                <input type="number" id="fga" th:field="*{fga}" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" th:field="*{date}" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="opponent">Opponent</label>
+                <input type="text" id="opponent" th:field="*{opponent}" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">Add Game</button>
+            <a th:href="@{/player/{teamid}(teamid=${player.team.id})}" class="btn btn-danger mt-2">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
