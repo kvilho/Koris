@@ -73,7 +73,6 @@ public class DemoApplication {
                 gameRepository.save(lebronGame);
             }
 
-            // Create regular user if not exists
             if (repository.findByUsername("user") == null) {
                 String userHashPwd = bc.encode("userpassword");
 
@@ -102,7 +101,7 @@ public class DemoApplication {
 
                 Game curryGame = new Game();
                 curryGame.setPlayer(curry);
-                curryGame.setDate(LocalDate.of(2024, 11, 20)); // Random date
+                curryGame.setDate(LocalDate.of(2024, 11, 20));
                 curryGame.setOpponent("Los Angeles Lakers");
 				curryGame.setMins(33);
                 curryGame.setPoints(35);

@@ -26,6 +26,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Created By</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -33,6 +34,7 @@
             <tbody>
                 <tr th:each="team : ${teams}">
                     <td th:text="${team.name}">Team Name</td>
+                    <td th:text="${team.owner.username}">Created By</td>
                     <td> <a th:href="@{/player/{id}(id=${team.id})}">See players</a></td>
                     <td>
                         <a th:href="@{/editteam/{id}(id=${team.id})}" class="btn btn-secondary">
