@@ -1,10 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Add Player</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
+
 <body>
     <div class="container">
         <h1 class="mt-3">Add Player to Team: <span th:text="${team.name}"></span></h1>
@@ -21,7 +25,8 @@
 
             <div class="form-group">
                 <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" th:field="*{dob}" class="form-control" required />
+                <input type="text" id="dob" class="form-control" required />
+                <input type="hidden" id="hiddenDob" th:field="*{dob}" />
             </div>
 
             <div class="form-group">
@@ -37,7 +42,8 @@
             <div class="form-group">
                 <label for="position">Position</label>
                 <select id="position" th:field="*{position}" class="form-control" required>
-                    <option th:each="pos : ${T(vk.koris.demo.domain.Position).values()}" th:value="${pos}" th:text="${pos}"></option>
+                    <option th:each="pos : ${T(vk.koris.demo.domain.Position).values()}" th:value="${pos}"
+                        th:text="${pos}"></option>
                 </select>
             </div>
 
@@ -46,4 +52,27 @@
         </form>
     </div>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dobInput = document.getElementById('dob');
+        const hiddenDobInput = document.getElementById('hiddenDob');
+
+        flatpickr(dobInput, {
+            dateFormat: "d/m/Y",
+            altInput: true,
+            altFormat: "F j, Y",
+            allowInput: true,
+            defaultDate: hiddenDobInput.value,
+            onChange: function(selectedDates, dateStr, instance) {
+                hiddenDobInput.value = instance.formatDate(selectedDates[0], "Y-m-d");
+            },
+            onClose: function(selectedDates, dateStr, instance) {
+                if (dobInput.value !== dateStr) {
+                    hiddenDobInput.value = instance.formatDate(instance.parseDate(dobInput.value, "d/m/Y"), "Y-m-d");
+                }
+            }
+        });
+    });
+</script>
+
 </html>

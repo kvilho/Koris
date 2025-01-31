@@ -1,31 +1,43 @@
 package vk.koris.demo.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
-@Entity(name="users")
+@Entity(name = "users")
 public class AppUser {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false, updatable = false)
+	private Long id;
 
-    // Username with unique constraint
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
 
-    @Column(name = "password", nullable = false)
-    private String passwordHash;
+	@Column(name = "email", nullable = false, unique = true)
+	private String email;
 
-    @Column(name = "role", nullable = false)
-    private String role;
-    
-    public AppUser() {
-    }
+	@Column(name = "password", nullable = false)
+	private String passwordHash;
+
+	@Column(name = "role", nullable = false)
+	private String role;
+
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Team> teams;
+
+	public AppUser() {
+	}
 
 	public AppUser(String username, String passwordHash, String role) {
 		super();
@@ -64,6 +76,22 @@ public class AppUser {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 
 }

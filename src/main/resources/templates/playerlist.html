@@ -4,10 +4,23 @@
     <title>Player List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
 
     <div class="container">
+        <div class="username-display d-flex align-items-center p-2 bg-light border rounded" style="max-width: 300px;">
+            <span class="font-weight-bold text-primary" th:text="'Logged in as: ' + ${username}"></span>
+        </div>
+        <form th:action="@{/logout}" method="post" class="logout-button">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
         <h1 class="mt-3">Player List for Team: <span th:text="${team.name}"></span></h1>
         
         <table class="table table-striped">

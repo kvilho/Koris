@@ -19,7 +19,7 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private Integer mins;
     private Integer points;
     private Integer rebounds;
@@ -119,7 +119,6 @@ public class Game {
     public void setPlayer(Player player) {
         this.player = player;
     }
-    
 
     public LocalDate getDate() {
         return date;
@@ -148,7 +147,6 @@ public class Game {
         this.updateFgp();
     }
 
-
     public String getOpponent() {
         return opponent;
     }
@@ -156,10 +154,6 @@ public class Game {
     public void setOpponent(String opponent) {
         this.opponent = opponent;
     }
-
-    
-
-    
 
     @Override
     public String toString() {
@@ -185,8 +179,5 @@ public class Game {
     public void setFgp(Double fgp) {
         this.fgp = fgp;
     }
-    
-
-    
 
 }
