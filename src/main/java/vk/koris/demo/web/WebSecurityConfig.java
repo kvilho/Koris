@@ -31,11 +31,11 @@ public class WebSecurityConfig {
                         .requestMatchers(antMatcher("/teamlist")).permitAll()
                         .requestMatchers(antMatcher("/player/**")).permitAll()
                         .requestMatchers(antMatcher("/gamelog/**")).permitAll()
-                        .requestMatchers(toH2Console()).permitAll()
+                        .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                         .anyRequest().permitAll()
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(toH2Console()))
+                        .ignoringRequestMatchers(antMatcher("/h2-console/**")))
                 .headers(headers -> headers
                         .frameOptions(frameoptions -> frameoptions
                                 .disable()))
